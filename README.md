@@ -45,3 +45,55 @@ See the [ctest manual](https://cmake.org/cmake/help/latest/manual/ctest.1.html) 
 - Pull requests are welcome! 
 - If you encounter bugs, feel free to [file an issue](https://github.com/statsig-io/cpp-server-sdk/issues).
 - For integration questions/help, [join our slack community](https://join.slack.com/t/statsigcommunity/shared_invite/zt-pbp005hg-VFQOutZhMw5Vu9eWvCro9g).
+
+## Swift Wrapper (SwiftPM, Linux-friendly)
+
+This repo now includes a SwiftPM wrapper target `Statsig` that exposes a
+pure Swift API while calling into the C++ SDK internally.
+
+Important: per SwiftPM rules, any target that depends on `Statsig` must
+enable C++ interoperability.
+
+Install dependencies:
+
+`nlohmann-json` and `cpp-httplib` are vendored under `third_party/`.
+
+macOS (Homebrew):
+
+```bash
+brew install boost openssl@3
+brew link boost
+```
+
+Linux (apt):
+
+```bash
+sudo apt-get update
+sudo apt-get install -y \
+  build-essential \
+  pkg-config \
+  libssl-dev \
+  libboost-all-dev \
+```
+
+Minimal usage:
+
+```swift
+import Statsig
+
+do {
+  try Statsig.initialize(sdkKey: "YOUR_SERVER_KEY")
+  let user = StatsigUser(userID: "demo-user")
+  let enabled = try Statsig.checkGate(user: user, gate: "gate_name")
+  print(enabled)
+} catch {
+  print(error)
+}
+```
+
+Linux via Docker:
+
+```bash
+docker build -t statsig-swift-cpp .
+docker run --rm statsig-swift-cpp
+```

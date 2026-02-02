@@ -4,6 +4,8 @@
 #include <unordered_map>
 #include <variant>
 #include <vector>
+#include <optional>
+#include <mutex>
 #include <shared_mutex>
 
 #include "statsig_metadata.h"
