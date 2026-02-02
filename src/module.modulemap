@@ -1,0 +1,5 @@
+module StatsigCpp {
+  requires cplusplus
+  header "statsig_swift.h"
+  export *
+}

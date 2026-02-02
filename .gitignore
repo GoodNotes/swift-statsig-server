@@ -1,9 +1,8 @@
-.vscode
-.idea
-_deps
-CMakeCache.txt
-*.a
-cmake_install.cmake
-CMakeFiles
-build
-tmp
+.DS_Store
+/.build
+/Packages
+xcuserdata/
+DerivedData/
+.swiftpm/configuration/registries.json
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
+.netrc
